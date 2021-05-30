@@ -7,7 +7,8 @@ class Board extends React.Component {
         <Square
           value={this.props.squares[i]}
           onClick={() => this.props.onClick(i)}
-        />
+          winnerStyleBackgroundColor={this.props.winnerStyleBackgroundColor}
+          winner={this.props.winner} />
       );
     }
   

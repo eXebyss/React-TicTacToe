@@ -59,8 +59,17 @@ class Game extends React.Component {
       });
   
       let status;
+      let winnerStyleColor;
+      let winnerStyleBackgroundColor;
       if (winner) {
         status = "Winner: " + winner;
+        if (winner === "X") {
+          winnerStyleColor = {color: "yellowgreen"};
+          winnerStyleBackgroundColor = {backgroundColor: "yellowgreen"};          
+        } else {
+          winnerStyleBackgroundColor = {backgroundColor: "orange"};
+          winnerStyleColor = {color: "orange"};
+        }        
       } else {
         status = "Next player: " + (this.state.xIsNext ? "X" : "O");
       }
@@ -71,10 +80,12 @@ class Game extends React.Component {
             <Board
               squares={current.squares}
               onClick={i => this.handleClick(i)}
+              winnerStyleBackgroundColor={winnerStyleBackgroundColor}
+              winner={winner}
             />
           </div>
           <div className="game-info">
-            <div style={winner ? {color: "yellowgreen", fontWeight: "bold"} : {color: "black", fontWeight: "bold"}}>{status}</div>
+            <div style={winnerStyleColor}>{status}</div>
             <ol>{moves}</ol>
           </div>
         </div>
