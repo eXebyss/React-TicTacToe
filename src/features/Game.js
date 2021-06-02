@@ -63,10 +63,13 @@ class Game extends React.Component {
     if (winner) {
       status = "Winner: " + winner;
       if (winner === "X") {
-        winnerStyleColor = {color: "yellowgreen"};          
+        winnerStyleColor = {color: "yellowgreen", fontWeight: 'bold'};          
       } else {
-        winnerStyleColor = {color: "orange"};
-      }        
+        winnerStyleColor = {color: "orange", fontWeight: 'bold'};
+      }
+    } else if (current.squares.every(Boolean)) {   
+      status = 'Tie';
+      winnerStyleColor = {fontWeight: 'bold'};       
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
