@@ -1,11 +1,12 @@
 import React from 'react';
-import Square from '../features/Square';
+import Square from './Square';
 
 class Board extends React.Component {
 
   renderSquare(i) {
     return (
       <Square
+        key={i}
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
         winner={this.props.winner}
