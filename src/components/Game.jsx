@@ -8,15 +8,27 @@ class Game extends React.Component {
     this.state = {
       history: [
         {
-          squares: Array(9).fill(null),
-        },
+          squares: Array(9).fill(null)
+        }
       ],
       stepNumber: 0,
       xIsNext: true,
+      isDescending: true
     };
   }
 
   handleClick(i) {
+    const locations = [
+      [1, 1],
+      [2, 1],
+      [3, 1],
+      [1, 2],
+      [2, 2],
+      [3, 2],
+      [1, 3],
+      [2, 3],
+      [3, 3]
+    ];
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
@@ -28,17 +40,24 @@ class Game extends React.Component {
       history: history.concat([
         {
           squares: squares,
-        },
+          location: locations[i]
+        }
       ]),
       stepNumber: history.length,
-      xIsNext: !this.state.xIsNext,
+      xIsNext: !this.state.xIsNext
     });
   }
 
   jumpTo(step) {
     this.setState({
       stepNumber: step,
-      xIsNext: step % 2 === 0,
+      xIsNext: step % 2 === 0
+    });
+  }
+
+  sortHistory() {
+    this.setState({
+      isDescending: !this.state.isDescending
     });
   }
 
@@ -48,26 +67,23 @@ class Game extends React.Component {
     const winner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
-      const desc = move ? "Go to move #" + move : "Go to game start";
+      const desc = move
+        ? "Go to move #" + move + " @ " + history[move].location
+        : "Go to game start";
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button onClick={() => this.jumpTo(move)}>
+            {move === this.state.stepNumber ? <b>{desc}</b> : desc}
+          </button>
         </li>
       );
     });
 
     let status;
-    let winnerStyleColor;
     if (winner) {
-      status = "Winner: " + winner;
-      if (winner === "X") {
-        winnerStyleColor = { color: "yellowgreen", fontWeight: "bold" };
-      } else {
-        winnerStyleColor = { color: "orange", fontWeight: "bold" };
-      }
-    } else if (current.squares.every(Boolean)) {
-      status = "Tie";
-      winnerStyleColor = { fontWeight: "bold" };
+      status = "Winner: " + winner.player + " @ " + winner.line;
+    } else if (!current.squares.includes(null)) {
+      status = "draw";
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
@@ -76,18 +92,17 @@ class Game extends React.Component {
       <div className="game">
         <div className="game-board">
           <Board
+            winningSquares={winner ? winner.line : []}
             squares={current.squares}
-            onClick={(i) => this.handleClick(i)}
-            winner={winner}
+            onClick={i => this.handleClick(i)}
           />
         </div>
         <div className="game-info">
-          <div style={winnerStyleColor}>{status}</div>
-          <div className="player-info">
-            <div>Player: X</div>
-            <div>Player: Y</div>
-          </div>
-          <ol>{moves}</ol>
+          <div>{status}</div>
+          <ol>{this.state.isDescending ? moves : moves.reverse()}</ol>
+          <button onClick={() => this.sortHistory()}>
+            Sort by: {this.state.isDescending ? "Descending" : "Asending"}
+          </button>
         </div>
       </div>
     );

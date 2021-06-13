@@ -1,6 +1,8 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
+  background-color: rgb(23, 32, 48);
+  color: rgb(1, 154, 255);
 }
 
 ol,
@@ -69,4 +71,8 @@ ul {
 #root {
   display: grid;
   justify-items: center;
+}
+
+.square--winning {
+  background-color: yellow;
 }
