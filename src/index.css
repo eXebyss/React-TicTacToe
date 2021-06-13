@@ -44,15 +44,23 @@ ul {
 }
 
 .game {
-  display: grid;
-  grid-template-columns: 200px 300px;
+  display: flex;
+  flex-flow: row wrap;
   justify-items: center;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
 }
 
 .game-info {
   display: grid;
-  grid-template-rows: max-content;
+  grid-template-columns: 350px;
   justify-items: center;
+  margin-top: 25px;
+}
+
+.game-board {
+  margin-top: 25px;
 }
 
 .game-info ol {
@@ -66,11 +74,6 @@ ul {
   grid-template-columns: 125px 75px;
   justify-items: center;
   grid-column-gap: 25px;
-}
-
-#root {
-  display: grid;
-  justify-items: center;
 }
 
 .square--winning {
