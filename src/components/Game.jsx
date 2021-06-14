@@ -71,8 +71,8 @@ class Game extends React.Component {
         ? "Go to move #" +
           move +
           " @ " +
-          history[move].location +
-          (this.state.xIsNext ? "X" : "O")
+          history[move].location + " made by " +
+          (move % 2 === 0 ? "O" : "X")
         : "Go to game start";
       return (
         <li key={move}>

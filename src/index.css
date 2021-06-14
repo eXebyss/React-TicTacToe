@@ -52,7 +52,7 @@ ul {
 
 .game-info {
   display: grid;
-  grid-template-columns: 375px;
+  grid-template-columns: 500px;
   justify-items: center;
   margin-top: 25px;
 }
