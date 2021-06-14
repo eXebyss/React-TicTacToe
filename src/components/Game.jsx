@@ -8,12 +8,12 @@ class Game extends React.Component {
     this.state = {
       history: [
         {
-          squares: Array(9).fill(null)
-        }
+          squares: Array(9).fill(null),
+        },
       ],
       stepNumber: 0,
       xIsNext: true,
-      isDescending: true
+      isDescending: true,
     };
   }
 
@@ -27,7 +27,7 @@ class Game extends React.Component {
       [3, 2],
       [1, 3],
       [2, 3],
-      [3, 3]
+      [3, 3],
     ];
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
@@ -40,24 +40,24 @@ class Game extends React.Component {
       history: history.concat([
         {
           squares: squares,
-          location: locations[i]
-        }
+          location: locations[i],
+        },
       ]),
       stepNumber: history.length,
-      xIsNext: !this.state.xIsNext
+      xIsNext: !this.state.xIsNext,
     });
   }
 
   jumpTo(step) {
     this.setState({
       stepNumber: step,
-      xIsNext: step % 2 === 0
+      xIsNext: step % 2 === 0,
     });
   }
 
   sortHistory() {
     this.setState({
-      isDescending: !this.state.isDescending
+      isDescending: !this.state.isDescending,
     });
   }
 
@@ -68,7 +68,11 @@ class Game extends React.Component {
 
     const moves = history.map((step, move) => {
       const desc = move
-        ? "Go to move #" + move + " @ " + history[move].location
+        ? "Go to move #" +
+          move +
+          " @ " +
+          history[move].location +
+          (this.state.xIsNext ? "X" : "O")
         : "Go to game start";
       return (
         <li key={move}>
@@ -83,7 +87,7 @@ class Game extends React.Component {
     if (winner) {
       status = "Winner: " + winner.player + " @ " + winner.line;
     } else if (!current.squares.includes(null)) {
-      status = "draw";
+      status = "Draw";
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
@@ -94,7 +98,7 @@ class Game extends React.Component {
           <Board
             winningSquares={winner ? winner.line : []}
             squares={current.squares}
-            onClick={i => this.handleClick(i)}
+            onClick={(i) => this.handleClick(i)}
           />
         </div>
         <div className="game-info">

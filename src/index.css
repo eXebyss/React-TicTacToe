@@ -1,6 +1,6 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
-  margin: 20px;
+
   background-color: rgb(23, 32, 48);
   color: rgb(1, 154, 255);
 }
@@ -46,20 +46,19 @@ ul {
 .game {
   display: flex;
   flex-flow: row wrap;
-  justify-items: center;
-  align-items: center;
   justify-content: center;
   align-content: center;
 }
 
 .game-info {
   display: grid;
-  grid-template-columns: 350px;
+  grid-template-columns: 375px;
   justify-items: center;
   margin-top: 25px;
 }
 
 .game-board {
+  display: grid;
   margin-top: 25px;
 }
 
@@ -67,6 +66,7 @@ ul {
   display: grid;
   grid-template-columns: auto auto;
   grid-column-gap: 25px;
+  grid-row-gap: 5px;
 }
 
 .player-info {
@@ -78,4 +78,29 @@ ul {
 
 .square--winning {
   background-color: rgb(170, 255, 1);
+}
+
+@media (max-width: 130px) {
+  .game-board {
+    display: grid;
+    margin-top: 25px;
+    grid-template-columns: 130px;
+  }
+}
+
+@media (max-width: 350px) {
+  .game-info {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 350px) {
+  .game-info ol {
+    grid-template-columns: auto;
+  }
 }
