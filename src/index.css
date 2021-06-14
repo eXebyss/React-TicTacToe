@@ -88,7 +88,7 @@ ul {
   }
 }
 
-@media (max-width: 350px) {
+@media (max-width: 450px) {
   .game-info {
     display: flex;
     flex-flow: row wrap;
@@ -99,7 +99,7 @@ ul {
   }
 }
 
-@media (max-width: 350px) {
+@media (max-width: 450px) {
   .game-info ol {
     grid-template-columns: auto;
   }
